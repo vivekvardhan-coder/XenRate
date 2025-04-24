@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="rupee.png" type="image/png">
+  <title>Exchange Rate Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator-container">
+    <h1 class="title">Currency Exchange</h1>
+    
+    <div class="input-group">
+      <label class="input-label">Amount</label>
+      <input type="number" id="amount" class="amount-input" value="100" min="0" step="0.01">
+    </div>
+
+    <div class="money-symbols" id="money-symbols"></div>
+    
+    <div class="input-group">
+      <div class="currency-row">
+        <div class="currency-select-container">
+          <label class="input-label">From</label>
+          <select id="from-currency" class="currency-select">
+            <!-- Options will be dynamically populated -->
+          </select>
+          <span class="select-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+          </span>
+        </div>
+        
+        <button id="swap-btn" class="swap-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+          </svg>
+        </button>
+        
+        <div class="currency-select-container">
+          <label class="input-label">To</label>
+          <select id="to-currency" class="currency-select">
+            <!-- Options will be dynamically populated -->
+          </select>
+          <span class="select-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <button id="convert-btn" class="convert-btn">
+      <span id="convert-text">Convert</span>
+      <span id="loading-spinner" class="loading" style="display: none;"></span>
+    </button>
+    
+    <div id="result-container" class="result-container">
+      <div id="result-amount" class="result-amount">0.00</div>
+      <div id="result-text" class="result-text">USD = EUR</div>
+      <div id="exchange-rate-info" class="exchange-rate-info">1 USD = 0.85 EUR</div>
+    </div>
+    
+    <div id="last-updated" class="last-updated">Last updated: Apr 14, 2025</div>
+  </div>
+ <script src="script.js"></script>
+</body>
+</html>

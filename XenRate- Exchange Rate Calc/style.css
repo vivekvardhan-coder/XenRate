@@ -1,0 +1,429 @@
+:root {
+    --primary: #ff6f61; /* coral */
+    --primary-light: #ff8a75; /* lighter coral */
+    --primary-dark: #e65b4f; /* darker coral */
+    --secondary: #40e0d0; /* turquoise */
+    --dark: #0a1f44; /* deep navy */
+    --light: #f0f4f8; /* off-white */
+    --border-radius: 12px;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: rgba(0, 0, 0, 0.8);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    padding: 20px;
+}
+
+.calculator-container {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.calculator-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-container::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(var(--primary-light), transparent 70%);
+    top: -100px;
+    right: -100px;
+    border-radius: 50%;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.calculator-container::after {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(var(--secondary), transparent 70%);
+    bottom: -75px;
+    left: -75px;
+    border-radius: 50%;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--light);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    height: 4px;
+    width: 50px;
+    background: var(--primary);
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+    animation: fadeIn 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.input-group:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.input-group:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--light);
+    opacity: 0.8;
+}
+
+.amount-input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 18px;
+    color: var(--light);
+    transition: all 0.3s ease;
+}
+
+.amount-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.3);
+}
+
+.amount-input:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.currency-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.currency-select-container {
+    flex: 1;
+    position: relative;
+}
+
+.currency-select {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 16px;
+    color: var(--light);
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.currency-select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.3);
+}
+
+.currency-select:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.select-arrow {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.swap-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.swap-btn:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+.swap-btn:active {
+    transform: scale(0.95);
+}
+
+.convert-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.convert-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+}
+
+.convert-btn:hover::before {
+    left: 100%;
+}
+
+.convert-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.convert-btn:active {
+    transform: translateY(0);
+}
+
+.result-container {
+    margin-top: 25px;
+    text-align: center;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+    animation-fill-mode: both;
+    animation-delay: 0.3s;
+}
+
+.result-container.result-active {
+    border-color: var(--primary-light);
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 111, 97, 0.1);
+    }
+    100% {
+        box-shadow: 0 0 0 10px rgba(255, 111, 97, 0);
+    }
+}
+
+.result-amount {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--light);
+}
+
+.result-text {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.exchange-rate-info {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--light);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.currency-flag {
+    width: 24px;
+    height: 18px;
+    margin-right: 8px;
+    border-radius: 2px;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+.last-updated {
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 15px;
+}
+
+/* Currency option styles */
+.currency-option {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive styles */
+@media (max-width: 500px) {
+    .currency-row {
+        flex-direction: column;
+    }
+    
+    .swap-btn {
+        transform: rotate(90deg);
+        margin: 10px 0;
+    }
+    
+    .swap-btn:hover {
+        transform: rotate(90deg) scale(1.05);
+    }
+    
+    .swap-btn:active {
+        transform: rotate(90deg) scale(0.95);
+    }
+}
+
+/* Money symbols animation */
+.money-symbols {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    clip-path: polygon(
+        0 0,
+        35% 0,
+        35% 100%,
+        65% 100%,
+        65% 0,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+}
+
+.money-symbol {
+    position: absolute;
+    color: rgb(255, 143, 143);
+    font-size: 24px;
+    animation: twinkle-symbol 2s ease-in-out infinite;
+    text-shadow: 0 0 15px rgba(4, 220, 198, 0.7);
+    filter: drop-shadow(0 0 5px rgba(177, 48, 48, 0.7));
+}
+
+@keyframes twinkle-symbol {
+    0% {
+        opacity: 0.3;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.3;
+        transform: scale(0.9);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    animation: rotate 0.5s ease-in-out;
+}
